@@ -1,0 +1,46 @@
+/* -- GLOBAL -- */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--dark);
+    background-color: var(--light-bg);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* HEADER */
+header {
+    background-color: var(--primary);
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.inner-header {
+    width: 90%;
+}
+
+/* ---- MAIN ---- */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+.inner-main {
+    width: 90%;
+}
+
+/* ---- FOOTER ---- */
+footer {
+    background-color: #111;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    font-size: 14px;
+}
