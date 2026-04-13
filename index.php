@@ -2,11 +2,6 @@
 session_start();
 require_once "db/db.php";
 
-if (!isset($_SESSION["user_id"]))
-{
-    header("Location: login.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -23,22 +18,21 @@ if (!isset($_SESSION["user_id"]))
     <?php require "includes/header.php" ?>
     <main>
         <div class="inner-main">
-            <h1>Page</h1>
+                <h1>Weather</h1>
 
-            <div class="text">
-                <h2>Weather App</h2>
-            </div>
+                <div class="text">
+                    <h2>Weather App</h2>
+                </div>
 
-            <div class="input">
-                <input type="text" id="city" placeholder="Enter city name">
-                <button onclick="getWeather()">Get Weather</button>
-            </div>
+                <div class="input">
+                    <input type="text" id="city" placeholder="Enter city name">
+                    <button onclick="getWeather()">Get Weather</button>
+                </div>
 
-            <div class="display">
-                <p id="weather">City</p>
-            </div>
+                <div class="display">
+                    <p id="weather">City</p>
+                </div>
         </div>
-
     </main>
 
     <?php require "includes/footer.php" ?>
