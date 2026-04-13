@@ -2,6 +2,14 @@
 session_start();
 require_once "db/db.php";
 
+// Get weather data sent in by users
+$stmt = $conn->prepare("
+    SELECT date, temperatur, wind_strength, rain, place
+    FROM weather_data
+");
+$stmt->execute();
+$result = $stmt->get_result();
+$data = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +26,7 @@ require_once "db/db.php";
     <?php require "includes/header.php" ?>
     <main>
         <div class="inner-main">
+            <div>
                 <h1>Weather</h1>
 
                 <div class="text">
@@ -32,6 +41,32 @@ require_once "db/db.php";
                 <div class="display">
                     <p id="weather">City</p>
                 </div>
+            </div>
+
+            <hr>
+
+            <div>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Temperature</th>
+                        <th>Wind</th>
+                        <th>Rain</th>
+                        <th>Place</th>
+                    </tr>
+                    <?php foreach ($data as $row): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row["date"]) ?></td>
+                        <td><?= htmlspecialchars($row["temperatur"]) ?></td>
+                        <td><?= htmlspecialchars($row["wind_strength"]) ?></td>
+                        <td><?= htmlspecialchars($row["rain"]) ?></td>
+                        <td><?= htmlspecialchars($row["place"]) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+
+                <a href="insert_weather.php">Insert weather data</a>
+            </div>
         </div>
     </main>
 
