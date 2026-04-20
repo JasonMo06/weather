@@ -10,6 +10,20 @@ $stmt = $conn->prepare("
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
+
+// Array for chart data
+$dates = [];
+$temperatures = [];
+$winds = [];
+$rains = [];
+
+foreach ($data as $row)
+{
+    $dates[] = $row["date"];
+    $temperatures[] = $row["temperatur"];
+    $winds[] = $row["wind_strength"];
+    $rains[] = $row["rain"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +33,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="css/index_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -49,9 +64,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <table>
                     <tr>
                         <th>Date</th>
-                        <th>Temperature</th>
-                        <th>Wind</th>
-                        <th>Rain</th>
+                        <th>Temperature (C°)</th>
+                        <th>Wind (m/s)</th>
+                        <th>Rain (mm)</th>
                         <th>Place</th>
                     </tr>
                     <?php foreach ($data as $row): ?>
@@ -66,6 +81,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 </table>
 
                 <a href="insert_weather.php">Insert weather data</a>
+            </div>
+
+            <div>
+                <canvas id="weather-graph" width="600" height="300"></canvas>
+            </div>
+
+            <div>
             </div>
         </div>
     </main>
@@ -95,6 +117,53 @@ async function getWeather() {
         console.error('Error fetching data:', error);
     }
 }
+</script>
+
+<script>
+const labels = <?= json_encode($dates) ?>;
+const temperatures = <?= json_encode($temperatures) ?>;
+const winds = <?= json_encode($winds) ?>;
+const rains = <?= json_encode($rains) ?>;
+
+const ctx = document.getElementById('weather-graph').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+            datasets: [
+            {
+                label: 'Temperature (°C)',
+                    data: temperatures,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.3
+            },
+            {
+                label: 'Wind (m/s)',
+                    data: winds,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.3
+            },
+            {
+                label: 'Rain (mm)',
+                    data: rains,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.3
+            }
+        ]
+    },
+    options: {
+        responsive: false, // makes it fill the whole parent container if true
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 </body>
 </html>
