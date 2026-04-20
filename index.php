@@ -62,6 +62,8 @@ $averageRain = array_sum($rains) / count($rains);
             <hr>
 
             <div>
+                <!-- TODO: Add filtering -->
+                <!-- TODO: Add delete button (CRUD) -->
                 <table>
                     <tr>
                         <th>Date</th>
@@ -69,6 +71,7 @@ $averageRain = array_sum($rains) / count($rains);
                         <th>Wind (m/s)</th>
                         <th>Rain (mm)</th>
                         <th>Place</th>
+                        <th>Delete</th>
                     </tr>
                     <?php foreach ($data as $row): ?>
                     <tr>
@@ -77,6 +80,7 @@ $averageRain = array_sum($rains) / count($rains);
                         <td><?= htmlspecialchars($row["wind_strength"]) ?></td>
                         <td><?= htmlspecialchars($row["rain"]) ?></td>
                         <td><?= htmlspecialchars($row["place"]) ?></td>
+                        <td><a href="#">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
