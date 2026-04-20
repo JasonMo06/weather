@@ -24,6 +24,11 @@ foreach ($data as $row)
     $winds[] = $row["wind_strength"];
     $rains[] = $row["rain"];
 }
+
+// Calculate average stats
+$averageTemperature = array_sum($temperatures) / count($temperatures);
+$averageWind = array_sum($winds) / count($winds);
+$averageRain = array_sum($rains) / count($rains);
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +48,6 @@ foreach ($data as $row)
         <div class="inner-main">
             <div>
                 <h1>Weather</h1>
-
-                <div class="text">
-                    <h2>Weather App</h2>
-                </div>
 
                 <div class="input">
                     <input type="text" id="city" placeholder="Enter city name">
@@ -79,16 +80,18 @@ foreach ($data as $row)
                     </tr>
                     <?php endforeach; ?>
                 </table>
-
+                <br>
                 <a href="insert_weather.php">Insert weather data</a>
             </div>
-
+            <br><br>
             <div>
                 <canvas id="weather-graph" width="600" height="300"></canvas>
             </div>
 
-            <div>
-            </div>
+            <h3>Statistics:</h3>
+            <p>Average temperature: <?= round($averageTemperature, 2) ?> C°</p>
+            <p>Average wind: <?= round($averageWind, 2) ?> m/s</p>
+            <p>Average rain: <?= round($averageRain, 2) ?> mm</p>
         </div>
     </main>
 
