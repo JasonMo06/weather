@@ -4,7 +4,7 @@ require_once "db/db.php";
 
 // Get weather data sent in by users
 $stmt = $conn->prepare("
-    SELECT date, temperatur, wind_strength, rain, place
+    SELECT weather_id, date, temperatur, wind_strength, rain, place
     FROM weather_data
 ");
 $stmt->execute();
@@ -63,7 +63,6 @@ $averageRain = array_sum($rains) / count($rains);
 
             <div>
                 <!-- TODO: Add filtering -->
-                <!-- TODO: Add delete button (CRUD) -->
                 <table>
                     <tr>
                         <th>Date</th>
@@ -80,7 +79,7 @@ $averageRain = array_sum($rains) / count($rains);
                         <td><?= htmlspecialchars($row["wind_strength"]) ?></td>
                         <td><?= htmlspecialchars($row["rain"]) ?></td>
                         <td><?= htmlspecialchars($row["place"]) ?></td>
-                        <td><a href="#">X</a></td>
+                        <td><a href="db/delete-weather-data.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
