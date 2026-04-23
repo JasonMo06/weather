@@ -79,7 +79,7 @@ $averageRain = array_sum($rains) / count($rains);
                         <td><?= htmlspecialchars($row["wind_strength"]) ?></td>
                         <td><?= htmlspecialchars($row["rain"]) ?></td>
                         <td><?= htmlspecialchars($row["place"]) ?></td>
-                        <td><a href="db/delete-weather-data.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>">X</a></td>
+                        <td><a href="db/delete_weather_data.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
