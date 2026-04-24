@@ -43,6 +43,32 @@ header {
     width: 90%;
     max-width: 1200px;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-header {
+    width: 33%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.middle-header {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+
+.right-header {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inner-header a {
+    text-decoration: none;
+    color: white;
 }
 
 /* ===== MAIN ===== */

@@ -8,11 +8,6 @@ if (!isset($_SESSION["user_id"]))
     exit();
 }
 
-if (!isset($_GET["weather_id"]))
-{
-    die("Weather_id missing");
-}
-
 $weather_id = $_GET["weather_id"];
 $user_id = $_SESSION["user_id"];
 
@@ -60,8 +55,8 @@ $row = $result->fetch_assoc();
 </head>
 
 <body>
-<?php require "includes/header.php"?>
 <div class="container">
+<?php require "includes/header.php"?>
     <main>
         <div class="inner-main">
             <h1>Edit weather data</h1>
@@ -81,8 +76,12 @@ $row = $result->fetch_assoc();
 
                 <input type="submit">
             </form>
+            
+            <br><br>
+            <a href="index.php">Back to home</a>
         </div>
     </main>
+<?php require "includes/footer.php" ?>
 </div>
 </body>
 </html>
