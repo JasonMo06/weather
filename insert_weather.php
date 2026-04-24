@@ -44,7 +44,7 @@ if (!isset($_SESSION["user_id"]))
 
                 <input type="submit">
             </form>
-            
+            <br>
             <a href="index.php">Back to home page</a>
         </div>
     </main>

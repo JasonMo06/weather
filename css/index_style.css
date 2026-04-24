@@ -1,50 +1,328 @@
-/* -- GLOBAL -- */
-html,
-body {
-    height: 100%;
+/* ===== GLOBAL ===== */
+* {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: var(--dark);
-    background-color: var(--light-bg);
+    box-sizing: border-box;
 }
 
+:root {
+    --primary: #3E4C58;
+    --primary-dark: #5A6F7E;
+    --light-bg: #f8fafc;
+    --white: #ffffff;
+    --text: #1e293b;
+    --border: #dbeafe;
+    --danger: #ef4444;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html,
+body {
+    min-height: 100%;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+}
+
+/* ===== CONTAINER ===== */
 .container {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header {
-    background-color: lightpink;
-    height: 90px;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: var(--primary);
+    color: white;
+    padding: 20px 0;
+    box-shadow: var(--shadow);
 }
 
 .inner-header {
     width: 90%;
+    max-width: 1200px;
+    margin: auto;
 }
 
-/* ---- MAIN ---- */
+/* ===== MAIN ===== */
 main {
     flex: 1;
     display: flex;
     justify-content: center;
-    padding: 20px 0;
+    padding: 30px 15px;
 }
 
 .inner-main {
-    width: 90%;
+    width: 100%;
+    max-width: 1200px;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
 }
 
-/* ---- FOOTER ---- */
-footer {
-    background-color: #111;
+/* ===== HEADINGS ===== */
+h1,
+h3 {
+    margin-bottom: 20px;
+}
+
+/* ===== WEATHER INPUT ===== */
+.input {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.input input {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input button {
+    padding: 12px 20px;
+    border: none;
+    background: var(--primary);
     color: white;
-    padding: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.input button:hover {
+    background: var(--primary-dark);
+}
+
+/* ===== WEATHER DISPLAY ===== */
+.display {
+    margin: 20px 0;
+    padding: 15px;
+    background: #eef2ff;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    display: block;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 14px;
     text-align: center;
-    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: var(--primary);
+    color: white;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* DELETE BUTTON */
+td a {
+    color: var(--danger);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ===== INSERT LINK ===== */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== CHART ===== */
+canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    margin-top: 30px;
+}
+
+/* ===== STATISTICS ===== */
+p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+/* ===== LOGIN PAGE ===== */
+.register-box {
+    width: 100%;
+    max-width: 420px;
+    margin: 60px auto;
+    background: var(--white);
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+.register-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary);
+}
+
+.register-box label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.register-box input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.register-box button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-box button:hover {
+    background: var(--primary-dark);
+}
+
+.register-box span {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.error {
+    color: var(--danger);
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+/* ===== INSERT WEATHER FORM ===== */
+form {
+    margin-top: 20px;
+}
+
+form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+form input[type="date"],
+form input[type="number"],
+form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background: var(--primary-dark);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .inner-main {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .input {
+        flex-direction: column;
+    }
+
+    .input button {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inner-main {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .display {
+        font-size: 16px;
+    }
+
+    table {
+        font-size: 12px;
+    }
 }

@@ -61,7 +61,7 @@ $averageRain = array_sum($rains) / count($rains);
 
             <hr>
 
-            <div>
+            <div class="table-wrapper">
                 <!-- TODO: Add filtering -->
                 <table>
                     <tr>
@@ -70,6 +70,7 @@ $averageRain = array_sum($rains) / count($rains);
                         <th>Wind (m/s)</th>
                         <th>Rain (mm)</th>
                         <th>Place</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     <?php foreach ($data as $row): ?>
@@ -79,18 +80,21 @@ $averageRain = array_sum($rains) / count($rains);
                         <td><?= htmlspecialchars($row["wind_strength"]) ?></td>
                         <td><?= htmlspecialchars($row["rain"]) ?></td>
                         <td><?= htmlspecialchars($row["place"]) ?></td>
-                        <td><a href="db/delete_weather_data.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>">X</a></td>
+                        <td><a href="edit_weather.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>">Edit</a></td>
+                        <td><a href="db/delete_weather_data.php?weather_id=<?php echo htmlspecialchars($row["weather_id"]) ?>" onclick="return confirmDelete()">X</a></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
                 <br>
-                <a href="insert_weather.php">Insert weather data</a>
+                <a href="insert_weather.php">Insert weather data (Must be logged in)</a>
             </div>
             <br><br>
             <div>
                 <canvas id="weather-graph" width="600" height="300"></canvas>
             </div>
-
+            <br>
+            <hr>
+            <br>
             <h3>Statistics:</h3>
             <p>Average temperature: <?= round($averageTemperature, 2) ?> C°</p>
             <p>Average wind: <?= round($averageWind, 2) ?> m/s</p>
@@ -112,8 +116,21 @@ async function getWeather() {
         const data = await response.json();
 
         if (data.cod === 200) {
-            document.getElementById('weather').innerText =
-                `Temperature in ${data.name}: ${data.main.temp}°C`;
+
+            const temp = data.main.temp;
+            const wind = data.wind.speed;
+            const clouds = data.clouds.all;
+
+            const rain = data.rain ? (data.rain["1h"] || 0) : 0;
+
+            document.getElementById('weather').innerHTML =
+                `
+                <b>${data.name}</b><br>
+                 Temperature: ${temp}°C<br>
+                 Wind: ${wind} m/s<br>
+                 Clouds: ${clouds}%<br>
+                 Rain: ${rain} mm
+                `;
         }
         else {
             document.getElementById('weather').innerText = 'City not found!';
@@ -162,7 +179,8 @@ new Chart(ctx, {
         ]
     },
     options: {
-        responsive: false, // makes it fill the whole parent container if true
+        responsive: true, // makes it fill the whole parent container if true
+        maintainAspectRatio: true,
         scales: {
             y: {
                 beginAtZero: true
@@ -170,6 +188,12 @@ new Chart(ctx, {
         }
     }
 });
+</script>
+<script>
+function confirmDelete()
+{
+    return confirm("Are you sure you want to delete this weather data?");
+}
 </script>
 </body>
 </html>

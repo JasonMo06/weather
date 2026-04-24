@@ -1,5 +1,5 @@
 <header>
 <div class="inner-header">
-header
+DICK LOGO
 </div>
 </header>
