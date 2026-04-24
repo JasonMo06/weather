@@ -31,13 +31,13 @@ if (!isset($_SESSION["user_id"]))
                 <input type="date" name="date"><br><br>
 
                 <label for="temperature">Temperature:</label><br>
-                <input type="number" step="any" name="temperature"><br><br>
+                <input type="number" step="any" min="-100" max="100" name="temperature"><br><br>
 
                 <label for="wind_strength">Wind Strength:</label><br>
-                <input type="number" step="any" name="wind_strength"><br><br>
+                <input type="number" step="any" min="0" max="150" name="wind_strength"><br><br>
 
                 <label for="rain">Rain:</label><br>
-                <input type="number" step="any" name="rain"><br><br>
+                <input type="number" step="any" min="0" max="500" name="rain"><br><br>
 
                 <label for="place">Place:</label><br>
                 <input type="text" name="place"><br><br>

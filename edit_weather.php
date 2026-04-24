@@ -63,13 +63,13 @@ $row = $result->fetch_assoc();
 
             <form method="POST">
                 <label for="temperature">Temperature:</label><br>
-                <input type="number" step="any" name="temperature" value="<?= htmlspecialchars($row["temperatur"]) ?>"><br><br>
+                <input type="number" step="any" min="-100" max="100" name="temperature" value="<?= htmlspecialchars($row["temperatur"]) ?>"><br><br>
 
                 <label for="wind_strength">Wind Strength:</label><br>
-                <input type="number" step="any" name="wind_strength" value="<?= htmlspecialchars($row["wind_strength"]) ?>"><br><br>
+                <input type="number" step="any" min="0" max="150" name="wind_strength" value="<?= htmlspecialchars($row["wind_strength"]) ?>"><br><br>
 
                 <label for="rain">Rain:</label><br>
-                <input type="number" step="any" name="rain" value="<?= htmlspecialchars($row["rain"]) ?>"><br><br>
+                <input type="number" step="any" min="0" max="500" name="rain" value="<?= htmlspecialchars($row["rain"]) ?>"><br><br>
 
                 <label for="place">Place:</label><br>
                 <input type="text" name="place" value="<?= htmlspecialchars($row["place"]) ?>"><br><br>
