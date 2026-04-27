@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     exit();
 }
 
-// GET existing row data
+// Get exiting row data
 $stmt = $conn->prepare("
 SELECT temperatur, wind_strength, rain, place
 FROM weather_data
@@ -60,10 +60,10 @@ $row = $result->fetch_assoc();
     <main>
         <div class="inner-main">
             <h1>Edit weather data</h1>
-
+            <!-- TODO: Fix value not showing up in form -->
             <form method="POST">
                 <label for="temperature">Temperature:</label><br>
-                <input type="number" step="any" min="-100" max="100" name="temperature" value="<?= htmlspecialchars($row["temperatur"]) ?>"><br><br>
+                <input type="number" step="any" min="-100" max="100" name="temperature" value="<?php echo htmlspecialchars($row["temperatur"]) ?>"><br><br>
 
                 <label for="wind_strength">Wind Strength:</label><br>
                 <input type="number" step="any" min="0" max="150" name="wind_strength" value="<?= htmlspecialchars($row["wind_strength"]) ?>"><br><br>
