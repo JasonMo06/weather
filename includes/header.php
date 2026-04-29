@@ -1,20 +1,26 @@
 <?php
-session_start();
 require_once "db/db.php";
 
-// Get username of user
-$user_id = $_SESSION["user_id"];
+$username = "Guest";
 
-$stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
+if (isset($_SESSION["user_id"]))
+{
+    // Get username of user
+    $user_id = $_SESSION["user_id"];
 
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+    $stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
 
-$username = $row["username"];
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if ($row)
+    {
+        $username = $row["username"];
+    }
+}
 ?>
-
 
 <header>
 <div class="inner-header">
@@ -27,7 +33,11 @@ $username = $row["username"];
     </div>
 
     <div class="right-header">
-        <a href="db/logout.php">Logout</a>
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="db/logout.php">Logout</a>
+        <?php else: ?>
+            <a href="login.php">Login</a>
+        <?php endif; ?>
     </div>
 </div>
 </header>
