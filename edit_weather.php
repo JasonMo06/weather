@@ -43,6 +43,12 @@ $stmt->bind_param("ii", $weather_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
+
+// Save values in variables
+$temp_val = $row["temperatur"];
+$wind_val = $row["wind_strength"];
+$rain_val = $row["rain"];
+$place_val = $row["place"];
 ?>
 
 <!DOCTYPE html>
@@ -60,19 +66,18 @@ $row = $result->fetch_assoc();
     <main>
         <div class="inner-main">
             <h1>Edit weather data</h1>
-            <!-- TODO: Fix value not showing up in form -->
             <form method="POST">
                 <label for="temperature">Temperature:</label><br>
-                <input type="number" step="any" min="-100" max="100" name="temperature" value="<?php echo htmlspecialchars($row["temperatur"]) ?>"><br><br>
+                <input type="number" step="any" min="-100" max="100" name="temperature" value="<?php echo htmlspecialchars($temp_val) ?>"><br><br>
 
                 <label for="wind_strength">Wind Strength:</label><br>
-                <input type="number" step="any" min="0" max="150" name="wind_strength" value="<?= htmlspecialchars($row["wind_strength"]) ?>"><br><br>
+                <input type="number" step="any" min="0" max="150" name="wind_strength" value="<?php echo htmlspecialchars($wind_val) ?>"><br><br>
 
                 <label for="rain">Rain:</label><br>
-                <input type="number" step="any" min="0" max="500" name="rain" value="<?= htmlspecialchars($row["rain"]) ?>"><br><br>
+                <input type="number" step="any" min="0" max="500" name="rain" value="<?php echo htmlspecialchars($rain_val) ?>"><br><br>
 
                 <label for="place">Place:</label><br>
-                <input type="text" name="place" value="<?= htmlspecialchars($row["place"]) ?>"><br><br>
+                <input type="text" name="place" value="<?php echo htmlspecialchars($place_val) ?>"><br><br>
 
                 <input type="submit">
             </form>
