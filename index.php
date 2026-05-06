@@ -30,7 +30,7 @@ $averageTemperature = array_sum($temperatures) / count($temperatures);
 $averageWind = array_sum($winds) / count($winds);
 $averageRain = array_sum($rains) / count($rains);
 ?>
-hello
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
